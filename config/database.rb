@@ -4,13 +4,8 @@ configure do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 
-  if Sinatra::Application.development?
-  set :database, {
-    adapter: "sqlite3",
-    database: "db/db.sqlite3"
-  }
-  else
-   db = URI.parse(ENV['DATAVASE_URL'])
+
+   db = URI.parse(ENV['DATABASE_URL'])
    set :database, {
      adapter: "postgresql",
      host: db.host,
